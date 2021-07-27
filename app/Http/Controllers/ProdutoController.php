@@ -14,7 +14,8 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        //
+       $produto = Produto::all();
+       return $produto;
     }
 
     /**
@@ -35,7 +36,9 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $produto = Produto::create($request->all());
+        return $produto;
     }
 
     /**
@@ -46,7 +49,13 @@ class ProdutoController extends Controller
      */
     public function show(produto $produto)
     {
-        //
+        dd('show');
+        if($produto === null){
+            return ['msg'=> 'produto não encontrado!'];
+
+        }
+        //    return $produto;
+        
     }
 
     /**
@@ -69,7 +78,12 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, produto $produto)
     {
-        //
+
+
+        
+        $produto->update($request->all());
+        return $produto;
+
     }
 
     /**
@@ -80,6 +94,9 @@ class ProdutoController extends Controller
      */
     public function destroy(produto $produto)
     {
-        //
+      //  dd($produto->getAttributes());
+
+        $produto->delete();
+        return ['msg' =>" produto foi removido com sucesso!"];
     }
 }
